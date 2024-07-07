@@ -15,8 +15,12 @@ deploy_script:
   - git config --global user.name "AppVeyor CI"
   - git checkout --orphan gh-pages
   - dir
-  - rm -rf *
   - mv C:\projects\whackmole\dist\* .
+  - dir
+  - rm -rf *.*
+  - dir
+  - rm -rf *
+  - dir
   - git add -A
   - git commit -m "Deploy to GitHub Pages"
   - git push origin gh-pages --force
