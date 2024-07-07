@@ -5,7 +5,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'docs'),
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -31,7 +31,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: path.join(__dirname, 'docs'),
+    static: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000,
   },
