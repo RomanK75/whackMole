@@ -1,22 +1,20 @@
 environment:
-  github_token:
-    secure: <your-github-token>
+  nodejs_version: "18"
 
 install:
-  - yarn install
+  - npm install
 
 build_script:
-  - yarn build
+  - npm run build
 
 deploy_script:
   - git config --global credential.helper store
-  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:github_token):x-oauth-basic@github.com`n"
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
   - git config --global user.email "ci@appveyor.com"
-  - git config --global user.name "Appveyor CI"
-  - git checkout gh-pages
-  - git add -f dist
-  - git commit -m "Update GitHub Pages"
-  - git subtree push --prefix dist origin gh-pages
-
-on_success:
-  - echo "Deployment to GitHub Pages is complete!"
+  - git config --global user.name "AppVeyor CI"
+  - git checkout --orphan gh-pages
+  - rm -rf *
+  - mv docs/* .
+  - git add -A
+  - git commit -m "Deploy to GitHub Pages"
+  - git push origin gh-pages --force
