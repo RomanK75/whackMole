@@ -14,9 +14,9 @@ deploy_script:
   - git config --global user.email "ci@appveyor.com"
   - git config --global user.name "AppVeyor CI"
   - git checkout --orphan gh-pages
-  - ls
+  - dir
   - cd ..
-  - ls
+  - dir
   - rm -rf *
   - mv dist/* .
   - git add -A
