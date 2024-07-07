@@ -2,12 +2,13 @@ environment:
   nodejs_version: "18"
   GIT_USER_EMAIL: "mytth75@gmail.com"
   GIT_USER_NAME: "RomanK75"
-  
+
 install:
   - ps: Install-Product node $env:nodejs_version
   - yarn install
 
 build_script:
+  - rm -rf docs
   - yarn run build
 
 on_success:
@@ -17,7 +18,7 @@ on_success:
   - git config --global user.name "%GIT_USER_NAME%"
   - git checkout main
   - git add docs
-  - git commit -m "Deploy to GitHub Pages"
+  - git commit -m "Deploy to GitHub Pages" --author="%GIT_USER_NAME%<%GIT_USER_EMAIL%>"
   - git push origin main --force
 
 cache:
