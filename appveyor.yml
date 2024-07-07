@@ -2,19 +2,25 @@ environment:
   nodejs_version: "18"
 
 install:
-  - npm install
+  - ps: Install-Product node $env:nodejs_version
+  - yarn install
 
 build_script:
-  - npm run build
+  - yarn run build
 
-deploy_script:
+on_success:
   - git config --global credential.helper store
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  - git config --global user.email "ci@appveyor.com"
-  - git config --global user.name "AppVeyor CI"
-  - git checkout --orphan gh-pages
-  - rm -rf *
-  - mv docs/* .
-  - git add -A
+  - git config --global user.email "%GIT_USER_EMAIL%"
+  - git config --global user.name "%GIT_USER_NAME%"
+  - git checkout main
+  - git add docs
   - git commit -m "Deploy to GitHub Pages"
-  - git push origin gh-pages --force
+  - git push origin main --force
+
+cache:
+  - node_modules
+
+branches:
+  only:
+    - main
