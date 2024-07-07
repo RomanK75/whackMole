@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/s3ga9jqpu3d4fnsf?svg=true)](https://ci.appveyor.com/project/RomanK75/whackmole)
 
 
 # Домашнее задание к занятию "3.Обработка событий"
