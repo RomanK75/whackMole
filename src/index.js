@@ -1,5 +1,20 @@
 import './style.css';
 
+// Получаем контейнер для игрового поля
+const gameContainer = document.querySelector('.game-container');
+
+// Количество отверстий (лунок)
+const numHoles = 16;
+
+// Создаем и добавляем отверстия в контейнер
+for (let i = 1; i <= numHoles; i++) {
+  const hole = document.createElement('div');
+  hole.classList.add('hole');
+  hole.id = `hole${i}`;
+  gameContainer.appendChild(hole);
+}
+
+
 document.addEventListener( 
 	"DOMContentLoaded", function () { 
 	const holes = 
